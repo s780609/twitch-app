@@ -55,7 +55,7 @@ function GenerateVideoCard() {
                 "Client-Id": `${clientId}`
             }
         });
-
+        console.log(response);
         const gameId = response.data.data[4].id;
         // console.log(` gameId == ${gameId}`);
         // console.log(`Bearer ${accessToken}`);
