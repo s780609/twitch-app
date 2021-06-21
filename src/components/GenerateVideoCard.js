@@ -66,7 +66,7 @@ function GenerateVideoCard() {
                 "Client-Id": `${clientId}`
             }
         });
-        
+        console.log(responseGameVideo);
         setTwitchGameData(responseGameVideo.data.data);
     }, [accessToken]);
 

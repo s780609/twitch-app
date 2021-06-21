@@ -7,6 +7,7 @@ function GenerateIFrame(props) {
     var parentDomain = props.parentDomain;
 
     if (twitchGameData == null || twitchGameData.length == 0) {
+        console.log("twitchGameData is empty");
         return (<>{`empty`}</>);
     }
 

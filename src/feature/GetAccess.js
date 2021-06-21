@@ -7,8 +7,6 @@ async function GetAccess(clientId, redirect_uri) {
 
     // refresh Url
     await window.location.replace(twitchUrl);
-
-    //return twitchUrl;
 }
 
 export default GetAccess;
