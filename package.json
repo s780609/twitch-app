@@ -1,5 +1,6 @@
 {
   "name": "twitch-app",
+  "homepage": "https://s780609.github.io/twitch-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
