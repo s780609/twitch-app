@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import IFrame from "./IFrame";
-import { CardColumns } from 'react-bootstrap';
+import { CardGroup, Container, CardDeck, CardColumns } from 'react-bootstrap';
 
 function GenerateIFrame(props) {
     var twitchGameData = props.twitchGameData;
@@ -8,9 +8,9 @@ function GenerateIFrame(props) {
 
     if (twitchGameData == null || twitchGameData.length == 0) {
         console.log("twitchGameData is empty");
-        return (<>{`empty`}</>);
+        return (<></>);
     }
-
+    console.log(parentDomain);
     return (<CardColumns>
         {
             twitchGameData.map(element => {

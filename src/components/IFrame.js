@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Card, CardColumns } from 'react-bootstrap';
+import { Card, CardColumns, Figure } from 'react-bootstrap';
 
 function IFrame({ height, width, allowfullscreen, autoplay, videoId, title, description, parent }) {
     return (
-        // <Card border="primary">
-        //     <Card.Body>
-        //         <Card.Title>{title}</Card.Title>
-        <div style={{ width: "400px", margin: "10px", marginRight: "-50px", display: "inline-block" }}><h3>{title}</h3>
+        <Card border="light" style={{ width: '400px' }}>
+            {/* <div style={{ width: "400px", margin: "10px", marginRight: "-50px", display: "inline-block" }}> */}
             <iframe
                 src={`https://player.twitch.tv/?autoplay=${autoplay == null ? false : true}&parent=${parent}&video=${videoId}`}
                 height={height == null ? 300 : height}
                 width={width == null ? 400 : width}
                 allowfullscreen={allowfullscreen == null ? `allowFullScreen` : allowfullscreen}
             ></iframe>
-        </div>
-        //     </Card.Body>
-        // </Card>
+            {/* </div> */}
+            <Card.Header>{title}</Card.Header>
+            <Card.Body>
+            </Card.Body>
+        </Card>
     );
 }
 
