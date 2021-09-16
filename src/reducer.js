@@ -1,11 +1,11 @@
 const redirect_uri = 
 //"https://hsutinghuan.ddns.net/Web1";
-//`https://s780609.github.io/twitch-app`;
-`http://localhost:3000`;
+`https://s780609.github.io/twitch-app`;
+//`http://localhost:3000`;
 
 const port = new URL(redirect_uri).port ? ":" + new URL(redirect_uri).port : "";
 const pathname = new URL(redirect_uri).pathname == "/" ? "" : new URL(redirect_uri).pathname;
-const parentDomain = new URL(redirect_uri).hostname //+ pathname; //+ port //+ new URL(redirect_uri).pathname;
+const parentDomain = new URL(redirect_uri).hostname + pathname; //+ port //+ new URL(redirect_uri).pathname;
 
 const initialState = {
     clientId: "vr0gbze3cw6zvxavzvjjxokdydm7cj",
