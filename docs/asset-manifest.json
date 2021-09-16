@@ -1,20 +1,23 @@
 {
   "files": {
-    "main.css": "/twitch-app/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/twitch-app/static/js/main.d7ca8610.chunk.js",
-    "main.js.map": "/twitch-app/static/js/main.d7ca8610.chunk.js.map",
+    "main.css": "/twitch-app/static/css/main.2ae47eeb.chunk.css",
+    "main.js": "/twitch-app/static/js/main.ba4c5ca8.chunk.js",
+    "main.js.map": "/twitch-app/static/js/main.ba4c5ca8.chunk.js.map",
     "runtime-main.js": "/twitch-app/static/js/runtime-main.c1ae58f0.js",
     "runtime-main.js.map": "/twitch-app/static/js/runtime-main.c1ae58f0.js.map",
-    "static/js/2.1098eda2.chunk.js": "/twitch-app/static/js/2.1098eda2.chunk.js",
-    "static/js/2.1098eda2.chunk.js.map": "/twitch-app/static/js/2.1098eda2.chunk.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/twitch-app/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.e8b17327.chunk.js": "/twitch-app/static/js/2.e8b17327.chunk.js",
+    "static/js/2.e8b17327.chunk.js.map": "/twitch-app/static/js/2.e8b17327.chunk.js.map",
     "index.html": "/twitch-app/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/twitch-app/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.1098eda2.chunk.js.LICENSE.txt": "/twitch-app/static/js/2.1098eda2.chunk.js.LICENSE.txt"
+    "static/css/2.4c97ca4f.chunk.css.map": "/twitch-app/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.2ae47eeb.chunk.css.map": "/twitch-app/static/css/main.2ae47eeb.chunk.css.map",
+    "static/js/2.e8b17327.chunk.js.LICENSE.txt": "/twitch-app/static/js/2.e8b17327.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c1ae58f0.js",
-    "static/js/2.1098eda2.chunk.js",
-    "static/css/main.9d5b29c0.chunk.css",
-    "static/js/main.d7ca8610.chunk.js"
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.e8b17327.chunk.js",
+    "static/css/main.2ae47eeb.chunk.css",
+    "static/js/main.ba4c5ca8.chunk.js"
   ]
 }
