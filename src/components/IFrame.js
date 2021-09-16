@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardColumns, Figure } from 'react-bootstrap';
 
-function IFrame({ height, width, allowfullscreen, autoplay, videoId, title, description, parent }) {
+function IFrame({ height, width, allowfullscreen = true, autoplay, videoId, title, description, parent }) {
     return (
         <Card border="light" style={{ width: '400px' }}>
             {/* <div style={{ width: "400px", margin: "10px", marginRight: "-50px", display: "inline-block" }}> */}
