@@ -1,6 +1,6 @@
 const redirect_uri = 
-"https://hsutinghuan.ddns.net/Web1";
-//`https://s780609.github.io/twitch-app`;
+//"https://hsutinghuan.ddns.net/Web1";
+`https://s780609.github.io/twitch-app`;
 //`http://localhost:3000`;
 
 const port = new URL(redirect_uri).port ? ":" + new URL(redirect_uri).port : "";
