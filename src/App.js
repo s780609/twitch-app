@@ -13,7 +13,6 @@ function App() {
 
   function onChange(e) {
     setSearchValue(e.target.value);
-    setGameName("");
   }
 
   function onClick(e) {
@@ -26,9 +25,9 @@ function App() {
         <>
           <Navbar expand="lg" bg="dark" variant="dark">
             <Nav className="container-fluid" >
-              <Navbar.Brand>{`煥煥的選擇`}</Navbar.Brand>
+              <Navbar.Brand>{`twitch-app`}</Navbar.Brand>
               <Form inline className="ml-auto">
-                <FormControl type="input" placeholder="Search Game Name" className="mr-sm-2" onChange={onChange} onKeyPress={onClick} />
+                <FormControl type="input" placeholder="Search Game Name" className="mr-sm-2" onChange={onChange} />
                 <Button variant="outline-success" onClick={onClick}>Search</Button>
               </Form>
             </Nav>

@@ -9,18 +9,20 @@ import IFrame from "./IFrame";
 import { Card, CardColumns, Alert, Container } from 'react-bootstrap';
 
 function GenerateVideoCard({ gameName }) {
-    console.log("render");
     const dispatch = useDispatch();
 
-    const [accessToken, setAccessToken] = useState("");
     const [twitchGameData, setTwitchGameData] = useState([]);
-    const [gameId, setGameId] = useState("");
-
+    //const [gameId, setGameId] = useState("");
+    const accessToken = useSelector((state) => state.accessToken);
     const clientId = useSelector((state) => state.clientId);
     const redirect_uri = useSelector((state) => state.redirect_uri);
     const parentDomain = useSelector(state => state.parentDomain);
 
     useEffect(async () => {
+        if (accessToken !== "") {
+            return;
+        }
+
         await OIDCImplicitCodeFlow();
     }, []);
 
@@ -35,14 +37,12 @@ function GenerateVideoCard({ gameName }) {
         else {
             const access_Token = await GetToken(flagString);
             dispatch({ type: "accessToken", accessToken: access_Token });
-            setAccessToken(access_Token);
         }
     }
 
-    // get data of game id 
+    // get data of game id and data
     useEffect(async () => {
         if (accessToken == "") {
-            console.log("access token is empty");
             return;
         }
 
@@ -54,35 +54,17 @@ function GenerateVideoCard({ gameName }) {
         });
 
         if (response.status == 200 && response.data != null && response.data.data.length != 0) {
-            setGameId(response.data.data[0].id);
-            console.log(response.data.data[0].id);
+            const data = await getGameData(response.data.data[0].id);
+
+            setTwitchGameData(data);
         }
         else {
-            console.log(`response's data is empty`);
-            console.log(response);
+            console.log(`response's data is empty, search by => ${gameName}`);
         }
-
-        // if (response.data.data == null || response.data.data.length == 0) {
-        //     return;
-        // }
-
-        // const gameId = response.data.data[0].id;
-
-        // const responseGameVideo = await axios.get(
-        //     `https://api.twitch.tv/helix/videos?game_id=${gameId}&first=20`
-        //     //`https://api.twitch.tv/helix/videos?game_id=1848487811&first=20`
-        //     , {
-        //         headers: {
-        //             Authorization: `Bearer ${accessToken}`,
-        //             "Client-Id": `${clientId}`
-        //         }
-        //     });
-        // console.log(responseGameVideo);
-        // setTwitchGameData(responseGameVideo.data.data);
     }, [accessToken, gameName]);
 
     // get videos by gameId
-    useEffect(async () => {
+    const getGameData = async (gameId) => {
         if (!gameId) {
             return;
         }
@@ -97,8 +79,8 @@ function GenerateVideoCard({ gameName }) {
                 }
             });
 
-        setTwitchGameData(responseGameVideo.data.data);
-    }, [gameId]);
+        return responseGameVideo.data.data;
+    }
 
     return (<Container >
         {(twitchGameData == null || twitchGameData.length == 0) ? <Alert show={true} variant="info">查無資料</Alert> : <></>}

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
 import { Card, CardColumns, Figure } from 'react-bootstrap';
 
 function IFrame({ height, width, allowfullscreen, autoplay, videoId, title, description, parent }) {
@@ -11,7 +9,7 @@ function IFrame({ height, width, allowfullscreen, autoplay, videoId, title, desc
                 src={`https://player.twitch.tv/?autoplay=${autoplay == null ? false : true}&parent=${parent}&video=${videoId}`}
                 height={height == null ? 300 : height}
                 width={width == null ? 400 : width}
-                allowfullscreen={allowfullscreen == null ? `allowFullScreen` : allowfullscreen}
+                allowfullscreen={allowfullscreen == null ? true : allowfullscreen}
             ></iframe>
             {/* </div> */}
             <Card.Header>{title}</Card.Header>
