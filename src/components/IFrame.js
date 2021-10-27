@@ -6,6 +6,7 @@ function IFrame({ height, width, allowfullscreen = true, autoplay, videoId, titl
         <Card border="light" style={{ width: '400px' }}>
             {/* <div style={{ width: "400px", margin: "10px", marginRight: "-50px", display: "inline-block" }}> */}
             <iframe
+                title={title}
                 src={`https://player.twitch.tv/?autoplay=${autoplay == null ? false : true}&parent=${parent}&video=${videoId}`}
                 height={height == null ? 300 : height}
                 width={width == null ? 400 : width}
