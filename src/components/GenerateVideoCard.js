@@ -18,6 +18,10 @@ function GenerateVideoCard({ gameName }) {
     const redirect_uri = useSelector((state) => state.redirect_uri);
     const parentDomain = useSelector(state => state.parentDomain);
 
+    if (gameName === ``) {
+        gameName = `minecraft`;
+    }
+
     useEffect(async () => {
         if (accessToken !== "") {
             return;
@@ -46,15 +50,27 @@ function GenerateVideoCard({ gameName }) {
             return;
         }
 
-        const response = await axios.get(`https://api.twitch.tv/helix/games?name=${gameName}`, {
+        // use the search categories api can query game id by fuzzy search
+        const response = await axios.get(`https://api.twitch.tv/helix/search/categories?query=${gameName}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 "Client-Id": `${clientId}`
             }
         });
 
+        // 這段請求一定要用完整的遊戲名稱 ex: League of Legends、fortnite、minecraft、apex legends
+        // const response = await axios.get(`https://api.twitch.tv/helix/games?name=${gameName}`, {
+        //     headers: {
+        //         Authorization: `Bearer ${accessToken}`,
+        //         "Client-Id": `${clientId}`
+        //     }
+        // });
+
         if (response.status == 200 && response.data != null && response.data.data.length != 0) {
-            const data = await getGameData(response.data.data[0].id);
+            const data = await getGameData(
+                response.data.data[0].id
+                //`25287`
+            );
 
             setTwitchGameData(data);
         }
