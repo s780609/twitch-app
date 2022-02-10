@@ -9,14 +9,14 @@ function GenerateIFrame(props) {
     if (twitchGameData == null || twitchGameData.length == 0) {
         return (<></>);
     }
-    
-    return (<CardColumns>
+
+    return (<>
         {
             twitchGameData.map(element => {
                 return <IFrame key={element.id} videoId={element.id} title={element.title} description={element.description} parent={parentDomain}></IFrame>
             })
         }
-    </CardColumns>);
+    </>);
 }
 
 export default GenerateIFrame;

@@ -98,8 +98,8 @@ function GenerateVideoCard({ gameName }) {
         return responseGameVideo.data.data;
     }
 
-    return (<Container >
-        {(twitchGameData == null || twitchGameData.length == 0) ? <Alert show={true} variant="info">查無資料</Alert> : <></>}
+    return (<Container fluid style={{ display: "flex", flexWrap: "wrap" }}>
+        {(twitchGameData == null || twitchGameData.length == 0) ? <Alert show={true} variant="info">沒有影片</Alert> : <></>}
         <GenerateIFrame twitchGameData={twitchGameData} parentDomain={parentDomain}></GenerateIFrame>
     </Container >);
 }
