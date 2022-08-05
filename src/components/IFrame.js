@@ -11,7 +11,7 @@ function IFrame({ height, width, allowfullscreen = true, autoplay, videoId, titl
                     src={`https://player.twitch.tv/?autoplay=${autoplay == null ? false : true}&parent=${parent}&video=${videoId}`}
                     height={height == null ? 300 : height}
                     width={width == null ? 400 : width}
-                    allowfullscreen={allowfullscreen == null ? true : allowfullscreen}
+                    allowFullScreen={allowfullscreen == null ? true : allowfullscreen}
                 ></iframe>
                 <p style={{ maxWidth: width, textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" }}>
                     {title}

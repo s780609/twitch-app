@@ -7,6 +7,7 @@ import GetAccess from "../feature/GetAccess";
 import GenerateIFrame from "../components/GenerateIFrame";
 import IFrame from "./IFrame";
 import { Card, CardColumns, Alert, Container } from 'react-bootstrap';
+import loader from 'archer-loader';
 
 function GenerateVideoCard({ gameName }) {
     const dispatch = useDispatch();
@@ -17,10 +18,6 @@ function GenerateVideoCard({ gameName }) {
     const clientId = useSelector((state) => state.clientId);
     const redirect_uri = useSelector((state) => state.redirect_uri);
     const parentDomain = useSelector(state => state.parentDomain);
-
-    if (gameName === ``) {
-        gameName = `minecraft`;
-    }
 
     useEffect(async () => {
         if (accessToken !== "") {
@@ -50,34 +47,73 @@ function GenerateVideoCard({ gameName }) {
             return;
         }
 
+        loader.show("#255AC4", 1.5, "Loading...");
+
+        if (gameName == "") {
+            const responseData = await getTopGames();
+            console.log(responseData)
+            for (let i = 0; i < responseData.length; i++) {
+
+                let gameId = responseData[i].id;
+                console.log(gameId);
+                const data = await getGameData(
+                    gameId
+                );
+
+                if (data != null && data.length != 0) {
+                    setTwitchGameData(data);
+                    return;
+                }
+            }
+
+            const data = await getDevelopeVideo();
+            setTwitchGameData(data);
+
+        }
+        else {
+            // use the search categories api can query game id by fuzzy search
+            const responseData = await getGameIds();
+
+            if (responseData != undefined && responseData.length != 0) {
+                for (let i = 0; i < responseData.length; i++) {
+                    let gameId = responseData[i].id;
+                    console.log(gameId);
+                    const data = await getGameData(
+                        gameId
+                        //`25287`
+                    );
+
+                    if (data != null && data.length != 0) {
+                        setTwitchGameData(data);
+                        return;
+                    }
+                }
+            }
+            else {
+                const data = await getDevelopeVideo();
+                setTwitchGameData(data);
+            }
+        }
+
+        loader.close();
+    }, [accessToken, gameName]);
+
+    const getGameIds = async () => {
+        const searchUrl = //`https://api.twitch.tv/helix/search/categories?query=${gameName}`;
+            `https://api.twitch.tv/helix/games?name=${gameName}`;
+
         // use the search categories api can query game id by fuzzy search
-        const response = await axios.get(`https://api.twitch.tv/helix/search/categories?query=${gameName}`, {
+        const response = await axios.get(searchUrl, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 "Client-Id": `${clientId}`
             }
         });
 
-        // 這段請求一定要用完整的遊戲名稱 ex: League of Legends、fortnite、minecraft、apex legends
-        // const response = await axios.get(`https://api.twitch.tv/helix/games?name=${gameName}`, {
-        //     headers: {
-        //         Authorization: `Bearer ${accessToken}`,
-        //         "Client-Id": `${clientId}`
-        //     }
-        // });
-
         if (response.status == 200 && response.data != null && response.data.data.length != 0) {
-            const data = await getGameData(
-                response.data.data[0].id
-                //`25287`
-            );
-
-            setTwitchGameData(data);
+            return response.data.data;
         }
-        else {
-            console.log(`response's data is empty, search by => ${gameName}`);
-        }
-    }, [accessToken, gameName]);
+    }
 
     // get videos by gameId
     const getGameData = async (gameId) => {
@@ -85,9 +121,9 @@ function GenerateVideoCard({ gameName }) {
             return;
         }
 
+        // 這段請求一定要用完整的遊戲名稱 ex: League of Legends、fortnite、minecraft、apex legends
         const responseGameVideo = await axios.get(
             `https://api.twitch.tv/helix/videos?game_id=${gameId}&first=20`
-            //`https://api.twitch.tv/helix/videos?game_id=1848487811&first=20`
             , {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -96,6 +132,39 @@ function GenerateVideoCard({ gameName }) {
             });
 
         return responseGameVideo.data.data;
+    }
+
+    // get developer video
+    const getDevelopeVideo = async () => {
+        try {
+            const response = await axios.get(
+                `https://api.twitch.tv/helix/videos?id=335921245`
+                , {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        "Client-Id": `${clientId}`
+                    }
+                });
+
+            return response.data.data;
+        }
+        catch (err) {
+            console.error(err);
+            alert(err.message);
+        }
+    }
+
+    const getTopGames = async () => {
+        const response = await axios.get(
+            `https://api.twitch.tv/helix/games/top`
+            , {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    "Client-Id": `${clientId}`
+                }
+            });
+
+        return response.data.data;
     }
 
     return (<Container fluid style={{ display: "flex", flexWrap: "wrap" }}>

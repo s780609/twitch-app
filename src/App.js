@@ -19,6 +19,10 @@ function App() {
     setGameName(searchValue);
   }
 
+  const getTopGames = async () => {
+    setGameName(``);
+  }
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -29,6 +33,7 @@ function App() {
               <Form inline className="ml-auto">
                 <FormControl type="input" placeholder="Search Game Name" className="mr-sm-2" onChange={onChange} />
                 <Button variant="outline-success" onClick={onClick}>Search</Button>
+                <Button variant="outline-success" onClick={getTopGames}>Top Games</Button>
               </Form>
             </Nav>
           </Navbar>
