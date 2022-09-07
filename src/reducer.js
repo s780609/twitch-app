@@ -1,8 +1,8 @@
 const redirect_uri = 
 //"https://hsutinghuan.ddns.net/Web1";
 //`https://s780609.github.io/twitch-app`;
-//`https://twitch-app-lac.vercel.app`;
-`http://localhost:3000`;
+`https://twitch-app-lac.vercel.app`;
+//`http://localhost:3000`;
 
 const port = new URL(redirect_uri).port ? ":" + new URL(redirect_uri).port : "";
 const pathname = new URL(redirect_uri).pathname == "/" ? "" : new URL(redirect_uri).pathname;
