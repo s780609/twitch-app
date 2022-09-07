@@ -1,4 +1,3 @@
-
 const tokenHandler = {};
 
 // get token 

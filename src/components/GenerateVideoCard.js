@@ -52,23 +52,19 @@ function GenerateVideoCard({ gameName }) {
         if (gameName == "") {
             const responseData = await getTopGames();
             console.log(responseData)
-            for (let i = 0; i < responseData.length; i++) {
 
+            for (let i = 0; i < responseData.length; i++) {
                 let gameId = responseData[i].id;
                 console.log(gameId);
-                const data = await getGameData(
-                    gameId
-                );
+                const data = await getGameData(gameId);
 
                 if (data != null && data.length != 0) {
                     setTwitchGameData(data);
-                    return;
                 }
             }
 
             const data = await getDevelopeVideo();
             setTwitchGameData(data);
-
         }
         else {
             // use the search categories api can query game id by fuzzy search
@@ -78,14 +74,10 @@ function GenerateVideoCard({ gameName }) {
                 for (let i = 0; i < responseData.length; i++) {
                     let gameId = responseData[i].id;
                     console.log(gameId);
-                    const data = await getGameData(
-                        gameId
-                        //`25287`
-                    );
+                    const data = await getGameData(gameId);
 
                     if (data != null && data.length != 0) {
                         setTwitchGameData(data);
-                        return;
                     }
                 }
             }
@@ -96,6 +88,8 @@ function GenerateVideoCard({ gameName }) {
         }
 
         loader.close();
+
+        return;
     }, [accessToken, gameName]);
 
     const getGameIds = async () => {
@@ -121,13 +115,14 @@ function GenerateVideoCard({ gameName }) {
             return;
         }
 
-        // 這段請求一定要用完整的遊戲名稱 ex: League of Legends、fortnite、minecraft、apex legends
         const responseGameVideo = await axios.get(
             `https://api.twitch.tv/helix/videos?game_id=${gameId}&first=20`
+            //`https://api.twitch.tv/helix/videos?game_id=29595&first=20`
             , {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
-                    "Client-Id": `${clientId}`
+                    "Client-Id": `${clientId}`,
+                    //'accept': 'application/vnd.twitchtv.v5+json'
                 }
             });
 
@@ -139,6 +134,7 @@ function GenerateVideoCard({ gameName }) {
         try {
             const response = await axios.get(
                 `https://api.twitch.tv/helix/videos?id=335921245`
+                //`https://api.twitch.tv/helix/videos?id=1584246451`
                 , {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
